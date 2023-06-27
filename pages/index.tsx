@@ -5,7 +5,6 @@ import styles from "@/styles/Home.module.css";
 import { useState } from "react";
 import { useEffect } from "react";
 import Layout from "@/components/Layout";
-import { GetServerSideProps, NextApiRequest } from 'next';
 const QRCode = require("qrcode");
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,21 +20,11 @@ type QRCode = {
   url: string;
 };
 
-type ServerSideProps = {
-  // Define las propiedades del objeto req que necesitas utilizar
-  // Por ejemplo, puedes incluir solo las propiedades headers necesarias
-  headers: {
-    [key: string]: string | string[] | undefined;
-    'x-forwarded-proto'?: string;
-    'x-forwarded-host'?: string;
-    host?: string;
-  };
-};
-
-export const getServerSideProps: GetServerSideProps = async ({ req }: { req: NextApiRequest }) => {
-  const protocol = req.headers['x-forwarded-proto'] || 'http';
-  const host = req.headers['x-forwarded-host'] || req.headers.host;
-  const baseUrl = `${protocol}://${host}`;
+export async function getServerSideProps({req} : any) {
+  try {
+    const protocol = req.headers['x-forwarded-proto'] || 'http';
+    const host = req.headers['x-forwarded-host'] || req.headers.host;
+    const baseUrl = `${protocol}://${host}`;
 
     console.log(baseUrl);
     let response = await fetch( baseUrl + "/api/getQRs");
