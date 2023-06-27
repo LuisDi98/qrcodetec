@@ -8,21 +8,28 @@ import ChartComponent from '../components/ProvinciasChartComponent';
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
-  const [visitasPorProvincia, setVisitasPorProvincia] = useState([]);
-  const baseUrl = window.location.origin;
-  const apiUrl = baseUrl + "/api/getQRProvinces";
 
+
+export default function Home() {
+  
+  let baseUrl = ""
   useEffect(() => {
+    baseUrl = window.location.origin;
     const urlParams = new URLSearchParams(window.location.search);
     const qrUrlParam = urlParams.get("qrUrl");
+    const apiUrl = baseUrl + "/api/getQRProvinces";
     const dynamicApiUrl = `${apiUrl}?qrUrl=${qrUrlParam}`;
+    console.log("\nDynamic URL:" + dynamicApiUrl);
+    
 
     fetch(dynamicApiUrl)
       .then((response) => response.json())
       .then((data) => setVisitasPorProvincia(data))
       .catch((error) => console.log(error));
   }, []);
+  const [visitasPorProvincia, setVisitasPorProvincia] = useState([]);
+  
+  
 
   return (
     <>

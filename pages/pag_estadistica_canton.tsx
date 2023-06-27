@@ -12,14 +12,14 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [visitasPorCantonF, setVisitasPorCantonF] = useState([]);
-  const baseUrl = window.location.origin;
-  const apiUrl =  baseUrl + "/api/getQRCantones";
+
   let parametro1 = '';
  
 
 
-
+  let baseUrl = "";
   useEffect(() => {
+    baseUrl = window.location.origin;
     const urlParams = new URLSearchParams(window.location.search);
     const qrUrlParam = urlParams.get("qrUrl");
     const parametro1FromUrl = urlParams.get("parametro1");
@@ -27,6 +27,7 @@ export default function Home() {
       parametro1 = parametro1FromUrl;
     }
     console.log("parametro1:", parametro1);
+    const apiUrl =  baseUrl + "/api/getQRCantones";
     const dynamicApiUrl = `${apiUrl}?qrUrl=${qrUrlParam}`;
 
 
