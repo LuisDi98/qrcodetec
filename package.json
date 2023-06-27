@@ -2,6 +2,9 @@
   "name": "qrcodetec",
   "version": "0.1.0",
   "private": true,
+  "build": {
+    "node-version": "16.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
