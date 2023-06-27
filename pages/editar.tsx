@@ -27,7 +27,7 @@ export default function Home() {
       throw new Error('Failed to generate QR code Data URL');
     }
   }
-
+////
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (name && description && url) {
