@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "build": {
-    "node-version": "16.x"
+    "node-version": "18.16.0"
   },
   "scripts": {
     "dev": "next dev",
